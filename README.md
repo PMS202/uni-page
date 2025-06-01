@@ -75,6 +75,8 @@ Spring MVC 环境下的分页支持模块，提供与 Spring MVC 的集成支持
 - 分页参数自动绑定
 - 分页结果自动转换
 
+### [web-uni-page-test](https://github.com/ethan-carter-g/uni-page/tree/main/spring-boot-starter-web-uni-page)
+Spring Boot Web 环境下的分页测试模块，提供分页功能的集成测试。
 
 
 ## 快速开始, 以uni-page-jdbc为例
