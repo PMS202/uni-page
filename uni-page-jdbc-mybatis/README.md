@@ -14,7 +14,15 @@ Uni-Page JDBC MyBatis 是 Uni-Page 框架的 MyBatis 集成组件，用于支持
 </dependency>
 ```
 
-### 2. 使用示例
+### 2. 配置 MyBatis 拦截器
+
+> **重要提示**：使用 MyBatis 分页时，必须在 MyBatis 配置中添加以下拦截器，否则分页功能将无法正常工作：
+> ```java
+> configuration.addInterceptor(new ResultSetHandlerInterceptor());
+> configuration.addInterceptor(new PageInterceptor());
+> ```
+
+### 3. 使用示例
 
 ```java
 // 创建分页查询
