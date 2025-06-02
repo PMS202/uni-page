@@ -4,6 +4,7 @@ import com.github.ethancarter.unipage.statement.BasePaginationStatement;
 import com.github.ethancarter.unipage.statement.BasePaginationStatementBuilder;
 import com.github.ethancarter.unipage.util.Assert;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -33,9 +34,9 @@ public class NamedParameterJdbcStatement extends BasePaginationStatement impleme
      */
     public NamedParameterJdbcStatement(Builder builder) {
         super(builder.getPageable());
-        Assert.state(builder.getSql() != null && !builder.getSql().isEmpty(), "Sql must not be empty!");
-        this.sql = builder.getSql();
-        this.paramMap = builder.getParamMap();
+        Assert.notEmpty(builder.sql, "Sql must not be empty!");
+        this.sql = builder.sql;
+        this.paramMap = Collections.unmodifiableMap(builder.paramMap);
     }
 
     public static NamedParameterJdbcStatement of(Function<Builder, Builder> builder) {
@@ -117,13 +118,6 @@ public class NamedParameterJdbcStatement extends BasePaginationStatement impleme
             return new NamedParameterJdbcStatement(this);
         }
 
-        public String getSql() {
-            return sql;
-        }
-
-        public Map<String, Object> getParamMap() {
-            return paramMap;
-        }
     }
 
 }

@@ -3,6 +3,7 @@ package com.github.ethancarter.unipage.web.component;
 import com.github.ethancarter.unipage.util.Assert;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class ColumnIndexRow extends ConversionPaginationRow {
 
     public ColumnIndexRow(Map<String, Integer> columnNameIndex, Map<Integer, Object> indexValue) {
         Assert.notNull(indexValue, "indexValue must not be null");
-        this.columnNameIndex = columnNameIndex;
+        this.columnNameIndex = Collections.unmodifiableMap(columnNameIndex);
         this.indexValue = indexValue;
     }
 

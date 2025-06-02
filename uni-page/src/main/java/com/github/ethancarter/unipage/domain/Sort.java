@@ -89,7 +89,7 @@ public class Sort implements Iterable<Sort.Order> {
     }
 
     @Override
-    public boolean equals(@Nullable Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -232,7 +232,7 @@ public class Sort implements Iterable<Sort.Order> {
         }
 
         @Override
-        public boolean equals(@Nullable Object obj) {
+        public boolean equals(Object obj) {
 
             if (this == obj) {
                 return true;

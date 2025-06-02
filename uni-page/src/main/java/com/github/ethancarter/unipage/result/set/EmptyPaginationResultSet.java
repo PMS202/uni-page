@@ -3,6 +3,7 @@ package com.github.ethancarter.unipage.result.set;
 import com.github.ethancarter.unipage.domain.Pageable;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * 空分页结果集
@@ -47,7 +48,7 @@ public class EmptyPaginationResultSet implements PaginationResultSet {
 
             @Override
             public PaginationRow next() {
-                return null;
+                throw new NoSuchElementException();
             }
         };
     }

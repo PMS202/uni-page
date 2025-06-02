@@ -18,7 +18,7 @@ public class Sql2oRow extends Row {
 
     public Sql2oRow(Map<String, Integer> columnNameToIdxMap, int columnCnt, boolean isCaseSensitive, Quirks quirks) {
         super(columnNameToIdxMap, columnCnt, isCaseSensitive, quirks);
-        this.columnNameToIdxMap = columnNameToIdxMap;
+        this.columnNameToIdxMap = Collections.unmodifiableMap(columnNameToIdxMap);
         this.isCaseSensitive = isCaseSensitive;
         this.quirks = quirks;
         this.values = new Object[columnCnt];

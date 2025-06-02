@@ -85,7 +85,7 @@ public class UserPaginationController {
 ## 扩展机制
 
 ### 1. 自定义分页组件
-
+添加 `@PaginationKey` 注解标记对应的自定义分页组件
 ```java
 @Component
 @PaginationKey("user")
@@ -100,9 +100,7 @@ public class UserPaginationComponent implements PaginationComponent {
             return dto;
         };
     }
-
-
-
+    
     @Override
     public void exports(PaginationResultSet resultSet, HttpServletRequest request, HttpServletResponse response) {
 
@@ -153,7 +151,7 @@ public class UserPaginationComponent implements PaginationComponent {
 ## 注意事项
 
 1. 默认分页语句处理器名称值开头不能包含 /
-2. PaginationComponent 中如果同时定义了 getDataResultSetHandler 和 getDataRowMapper，getDataResultSetHandler 优先级更高。导出组件同理，getExportsResultSetHandler 优先级高于 getExportsRowMapper
+2. PaginationComponent 中如果同时定义了 getDataResultSetHandler 和 getDataRowMapper，getDataResultSetHandler 优先级更高。
 
 ## 配置属性说明
 
