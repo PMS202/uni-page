@@ -94,8 +94,6 @@ Spring Boot Web 环境下的分页测试模块，提供分页功能的集成测�
 ### 简单示例
 
 ```java
-import static com.github.ethancarter.unipage.jdbc.NamedParameterJdbcStatement.of;
-
 public class PaginationTest {
    
     public void page() {
