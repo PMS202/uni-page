@@ -56,7 +56,7 @@ public class PaginationStatementTemplate implements PaginationStatementOperation
         }
         String message = "PaginationStatementExecutor not found for statement of type [" + statement.getClass().getName() + "].";
         if (statement.getLanguage() != null && !statement.getLanguage().isEmpty()) {
-            message += "PaginationStatementExecutor not found for language [" + statement.getLanguage() + "].";
+            message = "PaginationStatementExecutor not found for language [" + statement.getLanguage() + "].";
         }
         throw new MissingPaginationStatementExecutorException(message);
     }
