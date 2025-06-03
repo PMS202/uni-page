@@ -61,14 +61,14 @@ Uni-Page 是一个基于 Java 的通用分页框架，它通过抽象化的设�
 ### [uni-page-jdbc](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-jdbc)
 JDBC 数据源支持模块，提供基于 JDBC 的分页实现。
 
+### [uni-page-jdbc-mybatis](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-jdbc-mybatis)
+MyBatis 集成模块，提供与 MyBatis 框架的集成支持。
+    
 ### [uni-page-mongodb](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-mongodb)
 MongoDB 数据源支持模块，提供基于 MongoDB 的分页实现。
 
 ### [uni-page-elasticsearch](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-elasticsearch)
 Elasticsearch 数据源支持模块，提供基于 ES 的分页实现。
-
-### [uni-page-jdbc-mybatis](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-jdbc-mybatis)
-MyBatis 集成模块，提供与 MyBatis 框架的集成支持。
 
 ### [spring-boot-starter-web-uni-page](https://github.com/ethan-carter-g/uni-page/tree/main/spring-boot-starter-web-uni-page)
 Spring MVC 环境下的分页支持模块，提供与 Spring MVC 的集成支持，就像编写普通的控制器一样简单。
