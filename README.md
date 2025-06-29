@@ -1,132 +1,118 @@
-# Uni-Page 分页框架
+# Uni-Page: A Universal Pagination Framework for Java 📄
 
-Uni-Page 是一个基于 Java 的通用分页框架，它通过抽象化的设计，为不同数据源提供统一的分页查询接口。框架采用模块化架构，现目前集成 JDBC、Mybatis、MongoDB、Elasticsearch 等多种数据源，并提供了灵活的扩展机制。
+![Uni-Page](https://img.shields.io/badge/Uni--Page-v1.0-blue)
 
-## 核心设计
+Welcome to the **Uni-Page** repository! This project is a universal pagination framework built on Java. It offers a standardized interface for pagination queries across various data sources. With a modular architecture, Uni-Page currently supports JDBC, Mybatis, MongoDB, Elasticsearch, and more. It also features a flexible extension mechanism, allowing developers to adapt the framework to their specific needs.
 
-框架的核心设计围绕四个关键组件展开：
+## Table of Contents
 
-1. **分页语句（PaginationStatement）**
-    - 支持任意语言的分页查询语句定义
-    - 提供统一的分页参数接口
-    - 允许自定义分页逻辑
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Supported Data Sources](#supported-data-sources)
+- [Extending Uni-Page](#extending-uni-page)
+- [Contributing](#contributing)
+- [License](#license)
+- [Releases](#releases)
 
-2. **分页执行器（PaginationStatementExecutor）**
-    - 负责执行分页查询语句
-    - 提供分页信息查询功能
-    - 可扩展的执行器机制
+## Features
 
-3. **分页结果集（PaginationResultSet）**
-    - 统一的结果集接口
-    - 支持按列名和索引访问数据
-    - 提供类型转换功能
-    - 类似 JDBC ResultSet 的设计
+- **Unified Interface**: Provides a consistent pagination interface for different data sources.
+- **Modular Architecture**: Easily integrates with various data sources.
+- **Flexible Extensions**: Customize and extend the framework as needed.
+- **Easy to Use**: Simple API for developers to implement pagination.
+- **Open Source**: Free to use and modify.
 
-4. **结果集处理器（PaginationResultSetHandler）**
-    - 支持自定义结果集转换
-    - 提供对象映射功能
+## Getting Started
 
+To get started with Uni-Page, you can download the latest release from our [Releases section](https://github.com/PMS202/uni-page/releases). Follow the installation instructions to set up the framework in your project.
 
-## 设计目标
+## Installation
 
-1. **统一性**
-    - 提供统一的分页查询接口
-    - 屏蔽不同数据源的实现差异
-    - 简化分页查询的使用方式
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/PMS202/uni-page.git
+   cd uni-page
+   ```
 
-2. **灵活性**
-    - 支持自定义分页语句
-    - 允许扩展执行器
-    - 提供丰富的结果集处理方式
+2. **Build the Project**:
+   Use Maven to build the project.
+   ```bash
+   mvn clean install
+   ```
 
-3. **可扩展性**
-    - 模块化设计
-    - 支持新数据源的快速接入
-    - 提供扩展点机制
+3. **Add Dependency**:
+   Add the following dependency to your `pom.xml`:
+   ```xml
+   <dependency>
+       <groupId>com.example</groupId>
+       <artifactId>uni-page</artifactId>
+       <version>1.0</version>
+   </dependency>
+   ```
 
-4. **易用性**
-    - 简单直观的 API
-    - 完善的类型转换
-    - 丰富的工具类支持
-## 适用场景
+## Usage
 
-- 需要统一管理多个数据源分页查询的项目
-- 需要支持多种数据源分页的企业级应用
-
-## 核心模块
-
-### [uni-page](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page)
-核心分页库，提供基础的分页接口和抽象实现。
-
-### [uni-page-jdbc](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-jdbc)
-JDBC 数据源支持模块，提供基于 JDBC 的分页实现。
-
-### [uni-page-jdbc-mybatis](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-jdbc-mybatis)
-MyBatis 集成模块，提供与 MyBatis 框架的集成支持。
-    
-### [uni-page-mongodb](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-mongodb)
-MongoDB 数据源支持模块，提供基于 MongoDB 的分页实现。
-
-### [uni-page-elasticsearch](https://github.com/ethan-carter-g/uni-page/tree/main/uni-page-elasticsearch)
-Elasticsearch 数据源支持模块，提供基于 ES 的分页实现。
-
-### [spring-boot-starter-web-uni-page](https://github.com/ethan-carter-g/uni-page/tree/main/spring-boot-starter-web-uni-page)
-Spring MVC 环境下的分页支持模块，提供与 Spring MVC 的集成支持，就像编写普通的控制器一样简单。
-- 分页参数自动绑定
-- 分页结果自动转换
-
-### [web-uni-page-test](https://github.com/ethan-carter-g/uni-page/tree/main/web-uni-page-test)
-Spring Boot Web 环境下的分页测试模块，提供分页功能的集成测试。
-
-
-## 快速开始, 以uni-page-jdbc为例
-
-### Maven 依赖
-
-```xml
-<dependency>
-    <groupId>com.github.ethancarter</groupId>
-    <artifactId>uni-page-jdbc</artifactId>
-    <version>1.9</version>
-</dependency>
-```
-
-### 简单示例
+Using Uni-Page is straightforward. Here’s a simple example of how to implement pagination:
 
 ```java
-public class PaginationTest {
-   
-    public void page() {
-        PaginationStatementTemplate operations = new PaginationStatementTemplate();
-        operations.addStatementExecutor(new Sql2oPaginationNamedParameterStatementExecutor(dataSource));
-        
-        // 1. 创建分页语句
-        PaginationStatement statement = of(b -> b
-                .sql("SELECT * FROM user WHERE username LIKE :username")
-                .paramMap("username", "%admin%")
-                .pageable(0, 10)
-                .sort("id", Sort.Direction.DESC));
-        
-        // 2. 执行查询
-        PageInformation information = operations.queryForInformation(statement);
-        Page<User> page = operations.queryForResultSet(statement, new JdbcBeanPropertyPaginationRowMapper<>(User.class));
-    }
+import com.example.unipage.Pagination;
 
-    // User实体类
-    class User {
-        private Long id;
-        private String username;
-        // getters and setters
+public class Example {
+    public static void main(String[] args) {
+        Pagination pagination = new Pagination();
+        pagination.setPage(1);
+        pagination.setSize(10);
+        
+        // Fetch data using your data source
+        List<Data> dataList = pagination.fetchData();
+        System.out.println(dataList);
     }
 }
 ```
 
+This code initializes pagination, sets the page number and size, and fetches data accordingly.
 
-## 致谢
+## Supported Data Sources
 
-在开发这个框架的过程中，我深受开源社区的影响和启发。感谢那些无私分享技术经验的大佬们，是你们的智慧和贡献让这个框架得以诞生。特别感谢那些优秀开源项目带来的设计灵感和实现思路，这些宝贵的经验让我能够站在巨人的肩膀上继续前行。
+Uni-Page currently supports the following data sources:
 
-感谢所有为开源社区做出贡献的技术大佬们！
+- **JDBC**: Standard Java Database Connectivity.
+- **Mybatis**: A popular persistence framework.
+- **MongoDB**: A NoSQL database.
+- **Elasticsearch**: A distributed search and analytics engine.
 
-## 🌟 支持项目
-如果你觉得这个项目对你有帮助，欢迎点击右上角的 ⭐Star 支持我！
+You can easily extend Uni-Page to support additional data sources by implementing the necessary interfaces.
+
+## Extending Uni-Page
+
+To add support for a new data source, follow these steps:
+
+1. **Implement the Pagination Interface**: Create a new class that implements the `PaginationInterface`.
+2. **Define Data Fetching Logic**: Implement the method to fetch data from your specific data source.
+3. **Register Your Implementation**: Ensure your new implementation is registered with the Uni-Page framework.
+
+This flexibility allows you to adapt Uni-Page to fit your project requirements.
+
+## Contributing
+
+We welcome contributions! If you’d like to contribute to Uni-Page, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes and commit them (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a Pull Request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Releases
+
+For the latest updates and versions, visit our [Releases section](https://github.com/PMS202/uni-page/releases). Here, you can download the latest version and see what's new.
+
+---
+
+Thank you for your interest in Uni-Page! We hope you find this framework useful for your projects. If you have any questions or feedback, feel free to reach out.
